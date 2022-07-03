@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+
+h1{
+    margin-top: 15vh;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 3.1em;
+    margin-bottom: 2rem;
+    font-family: 'Montserrat', sans-serif;
+    width: 250px;
+    overflow-wrap: break-word;  
+    word-wrap: break-word; 
+    word-break: break-word;
+}
+.cardUsuario{
+    background-color: #f9f9f9;
+    box-shadow: 0.24rem 0.24rem 1.24rem 0 rgb(120 135 182 / 30%);
+
+    height: 6.5vh;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+}
+.infoUsuario{
+    margin-right: 3rem;
+    color: #022041;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.1em;
+    
+}
+.containerUsuarios{
+    min-height: 67.5vh;
+}
+.iconCard{
+    height: 3.5vh;
+    margin-left: 1rem;
+}

@@ -1,0 +1,50 @@
+
+
+.box_informações_modal {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    height: 38%;
+}
+
+.box_modal {
+    display: flex;
+    width: 600px;
+    align-items: center;
+    flex-direction: column;
+}
+
+.box_foto_nome_modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.box_informações_modal span {
+    font-size: 1.5em;
+
+
+}
+
+.box_span {
+    display: flex;
+    margin-top: 3rem;
+
+}
+
+.box_span_key_modal {
+    font-weight: 600;
+    font-size: 1.5em;
+}
+
+.span_value_modal {
+    font-size: 1.5em;
+    margin-left: 10px;
+}
+.nomeModal{
+    font-size: 2.5em;
+    font-style: normal;
+    font-weight: 600;
+    font-family: 'Montserrat', sans-serif;
+}

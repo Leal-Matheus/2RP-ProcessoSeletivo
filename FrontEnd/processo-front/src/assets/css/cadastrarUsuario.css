@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+
+.containerOrganizacao{
+    display: flex;
+    justify-content: space-between;
+    min-height: 61.5vh;
+}
+.containerCadastroLeft{
+    width: 50vw;
+}
+.formCadastro{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 3rem;
+}
+.inputLabelCadastro {
+    position: relative;
+    padding-top: 13px;
+    margin-bottom: 1rem;
+}
+
+    
+    .inputLabelCadastro input {
+    border: 1px solid #022041;
+    background-color: transparent;
+    border-radius:15px;
+    outline: none;
+    min-width: 250px;
+    width: 25vw;
+    height: 52px;
+    padding: 15px 20px;
+    font-size: 16px;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    -webkit-appearance: none;
+    }
+    
+    
+    
+    .inputLabelCadastro input::placeholder {
+    color: transparent;
+    }
+    
+    .inputLabelCadastro label {
+    pointer-events: none;
+    position: absolute;
+    top: calc(50% - 8px);
+    left: 15px;
+    transition: all .1s linear;
+    -webkit-transition: all .1s linear;
+    -moz-transition: all .1s linear;
+    color: #022041;
+    padding: 5px;
+    box-sizing: border-box;
+    }
+    
+    .inputLabelCadastro input:required:invalid+label {
+    color: red;
+    }
+    
+    .inputLabelCadastro input:focus:required:invalid {
+    border: 2px solid red;
+    }
+    
+    .inputLabelCadastro input:required:invalid+label:before {
+    content: '*';
+    }
+    
+    .inputLabelCadastro input:focus+label,
+    .inputLabelCadastro input:not(:placeholder-shown)+label {
+    font-size: 13px;
+    top: 0;
+    
+    }
+    .inputCadastroSelect{
+        width: 25vw;
+        height: 52px;
+        padding: 15px 20px;
+        font-size: 16px;
+        border-radius:15px;
+        margin-top: 1rem;
+        margin-bottom: 3rem;
+
+        border: 1px solid #022041;
+        background-color: transparent;
+    }
+    .bannerCadastro{
+        object-fit: cover;
+    }

@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+
+header{
+    position: fixed;
+    top: 0;
+    z-index: 99;
+    height: 8.6vh;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #022041;
+    width: 100%;
+    margin-bottom: 4rem;
+}
+
+.navHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+
+}
+.boxInfoHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logoHeader{
+    height: 5vh;
+    margin-right: 3rem;
+}
+.linkHeader{
+    font-size: 1em;
+    font-family: 'Quicksand', sans-serif;
+    text-transform: capitalize;
+    text-decoration: none;
+    color: #f9f9f9;
+
+    margin-left: 3rem;
+}
+.boxLoginHeader{
+    display: flex;
+    align-items: center;
+}
