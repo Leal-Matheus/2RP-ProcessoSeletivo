@@ -51,44 +51,63 @@ namespace Processo2RP_API.Controllers
             }
 
         }
+        [Authorize(Roles = "2, 3")]
         [Authorize]
         [HttpPut("Alterar/id/{idUsuario:int}")]
-        public IActionResult AlterarUsuario(UsuarioViewModel novoUsuario, int idUsuario)
+        public IActionResult AtualizarUsuario(UsuarioViewModel novoUsuario, int idUsuario)
         {
-            int idTipoUserLogado = Convert.ToInt32(HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value);
-            if (novoUsuario == null)
+            try
             {
-                return BadRequest(new
-                {
-                    Mensagem = "Informações inválidas!"
-                });
-            }
+                Usuario usuario = _usuarioRepository.BuscarPorId(idUsuario);
 
-            if (idTipoUserLogado == 1)
-            {
-                int id = Convert.ToInt32(HttpContext.User.Claims.First(c => c.Type == JwtRegisteredClaimNames.Jti).Value);
-
-                if (id == idUsuario)
+                if (usuario != null)
                 {
-                    _usuarioRepository.AtualizarUsuario(novoUsuario, idUsuario);
-                    return Ok(new
-                    {
-                        Mensagem = "Usuario alterado com sucesso!"
-                    });
+                    if (novoUsuario != null)
+                        _usuarioRepository.AtualizarUsuario(novoUsuario, idUsuario);
+                }
+                else
+                {
+                    return BadRequest();
                 }
 
-                return StatusCode(403, new
+                return StatusCode(201, new
                 {
-                    Mensagem = "Você não tem autorização para alterar este perfil!"
+                    Mensagem = $"usuario atualizado: {novoUsuario.Nome}"
                 });
+
             }
-            else
+            catch (Exception Ex)
             {
-                _usuarioRepository.AtualizarUsuario(novoUsuario, idUsuario);
-                return Ok(new
+                return BadRequest(Ex);
+            }
+        }
+        [Authorize]
+        [HttpPut("AlterarMeu/id/{idUsuario:int}")]
+        public IActionResult AtualizarMeuUsuario(UsuarioAtualizadoViewModel novoUsuario, int idUsuario)
+        {
+            try
+            {
+                Usuario usuario = _usuarioRepository.BuscarPorId(idUsuario);
+
+                if (usuario != null)
                 {
-                    Mensagem = "Usuario alterado com sucesso!"
+                    if (novoUsuario != null)
+                        _usuarioRepository.AtualizarMeuUsuario(novoUsuario, idUsuario);
+                }
+                else
+                {
+                    return BadRequest();
+                }
+
+                return StatusCode(201, new
+                {
+                    Mensagem = $"usuario atualizado: {novoUsuario.Nome}"
                 });
+
+            }
+            catch (Exception Ex)
+            {
+                return BadRequest(Ex);
             }
         }
 
@@ -147,7 +166,7 @@ namespace Processo2RP_API.Controllers
                 {
                     if (idLogado == idUsuario)
                     {
-                        BuscaUsuarioViewModel user = _usuarioRepository.BuscarUsuario(idUsuario);
+                        Usuario user = _usuarioRepository.BuscarPorId(idUsuario);
                         return Ok(user);
                     }
 
@@ -157,7 +176,7 @@ namespace Processo2RP_API.Controllers
                     });
                 }
 
-                BuscaUsuarioViewModel usuario = _usuarioRepository.BuscarUsuario(idUsuario);
+                Usuario usuario = _usuarioRepository.BuscarPorId(idUsuario);
                 if (usuario == null) return NotFound(new
                 {
                     Mensagem = "Não existe um usuário com o id informado"

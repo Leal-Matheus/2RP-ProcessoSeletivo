@@ -7,6 +7,7 @@ import { parseJwt } from '../../services/auth';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import '../../assets/css/modal.css'
+import { useParams } from "react-router-dom";
 
 const Background = styled.div`
   width: 100vw;
@@ -21,8 +22,8 @@ const Background = styled.div`
 `;
 
 const ModalWrapper = styled.div`
-  width: 600px;
-  height: 500px;
+  width: 60vw;
+  height: 65vh;
   box-shadow: 0 5px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
   color: #000;
@@ -71,7 +72,17 @@ const CloseModalButton = styled(MdClose)`
 export const Modall = ({ showModal, setShowModal, usuarios }) => {
     const modalRef = useRef();
 
-    let history = useHistory();
+    const history = useHistory();
+    const [idTipoUsuario, setIdTipoUsuario] = useState(0);
+    const [userStatus, setUserStatus] = useState(0)
+    const [nome, setNome] = useState('')
+    const [email, setEmail] = useState('')
+    const [senha, setSenha] = useState('')
+    const [usuario, setUsuario] = useState([])
+
+    const refresh = ()=>{
+        window.location.reload();
+     }
 
     const animation = useSpring({
         config: {
@@ -97,6 +108,42 @@ export const Modall = ({ showModal, setShowModal, usuarios }) => {
         [setShowModal, showModal]
     );
 
+    function AtualizarUsuario(event) {
+        event.preventDefault();
+
+        axios.put("http://localhost:5000/api/Usuarios/Alterar/id/" + usuarios.idUsuario, {
+
+            nome: nome,
+            idTipoUsuario: idTipoUsuario,
+            email: email,
+            senha: senha,
+            userStatus: userStatus
+        }, {
+
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem('usuario-token')
+            }
+
+
+
+        })
+        .then(response => {
+            if (response.status === 201) {
+
+                setEmail('')
+                setNome('')
+                setSenha('')
+                refresh()
+                console.log("usuário atualizado!")
+
+            }
+        })
+        .catch
+            .catch(erro => console.log(erro))
+    }
+    function checkAtivo() {
+        setUserStatus(1)
+    }
 
 
     useEffect(
@@ -109,7 +156,6 @@ export const Modall = ({ showModal, setShowModal, usuarios }) => {
 
 
 
-
     return (
         <>
             {showModal ? (
@@ -118,20 +164,11 @@ export const Modall = ({ showModal, setShowModal, usuarios }) => {
                         <ModalWrapper showModal={showModal}>
                             <ModalContent>
                                 <div className='box_modal'>
-                                    <div className='box_foto_nome_modal'>
-
-                                        <span className='nomeModal'>{usuarios.nome}</span>
-
-
-
-
-                                    </div>
-
-
 
                                     <div className='box_informações_modal'>
+                                        <span className='nomeModal'>{usuarios.nome}</span>
                                         <div className='box_span'>
-                                            <span className='box_span_key'>E-Mail: </span>
+                                            <span className='box_span_key_modal'>E-Mail: </span>
                                             <span className='span_value_modal'>{usuarios.email}</span>
                                         </div>
 
@@ -142,7 +179,7 @@ export const Modall = ({ showModal, setShowModal, usuarios }) => {
 
 
                                         <div className='box_span'>
-                                            <span className='box_span_key'>Status: </span>
+                                            <span className='box_span_key_modal'>Status: </span>
                                             {<span
                                                 className='span_value_modal'
 
@@ -156,9 +193,45 @@ export const Modall = ({ showModal, setShowModal, usuarios }) => {
 
                                                 }</span>}
                                         </div>
-
-                                        <button onClick={() => history.push(`/atualizarUsuario/${usuarios.idUsuario}`)}> Atualizar Dados</button>
                                     </div>
+                                    <form className="formCadastro" onSubmit={(AtualizarUsuario)}>
+                                        <div className="inputLabelAtualizar">
+                                            <input type="text" name="nome" placeholder="Nome" value={nome} onChange={(evt) => setNome(evt.target.value)} />
+                                            <label for="nome">Nome</label>
+                                        </div>
+
+                                        <div className="inputLabelAtualizar">
+                                            <input type="email" name="email" placeholder="E-Mail" value={email} onChange={(evt) => setEmail(evt.target.value)} />
+                                            <label for="email">E-Mail</label>
+                                        </div>
+
+                                        <div className="inputLabelAtualizar">
+                                            <input type="text" name="senha" placeholder="Senha" value={senha} onChange={(evt) => setSenha(evt.target.value)} />
+                                            <label for="senha">Senha</label>
+                                        </div>
+                                        <select
+                                            name="idTipoUsuario"
+                                            value={idTipoUsuario}
+                                            className="inputAtualizarSelect"
+                                            onChange={(event) => setIdTipoUsuario(event.target.value)}
+
+                                        >
+
+                                            <option value="#">Tipo de Usuario</option>
+                                            <option value={1}>Geral</option>
+                                            <option value={2}>Administrador</option>
+                                            <option value={3}>Root</option>
+                                        </select>
+
+                                        <input type="checkbox"
+                                            id="switch"
+                                            name="validar"
+                                            value={userStatus}
+                                            onClick={checkAtivo}
+                                        /><label className='label_switch' htmlFor="switch">Toggle</label>
+                                        <button className='button' type="submit">Atualizar</button>
+                                    </form>
+
                                 </div>
                             </ModalContent>
                             <CloseModalButton

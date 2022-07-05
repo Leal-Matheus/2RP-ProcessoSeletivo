@@ -54,12 +54,27 @@ namespace Processo2RP_API.Repositories
                 ctx.SaveChanges();
             }
         }
+        public void AtualizarMeuUsuario(UsuarioAtualizadoViewModel novoUsuario, int idUsuario)
+        {
+            if (novoUsuario != null)
+            {
+                Usuario usuario = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
+                string senhaHash = Criptografia.GerarHash(novoUsuario.Senha);
 
-        public BuscaUsuarioViewModel BuscarUsuario(int idUsuario)
+                usuario.Email = novoUsuario.Email;
+                usuario.Senha = senhaHash;
+                usuario.Nome = novoUsuario.Nome;
+
+                ctx.Usuarios.Update(usuario);
+                ctx.SaveChanges();
+            }
+        }
+
+        public Usuario BuscarPorId(int idUsuario)
         {
             Usuario usuario = ctx.Usuarios.FirstOrDefault(u => u.IdUsuario == idUsuario);
 
-            BuscaUsuarioViewModel usuarioBag = new BuscaUsuarioViewModel();
+            Usuario usuarioBag = new Usuario();
             usuarioBag.Email = usuario.Email;
             usuarioBag.Nome = usuario.Nome;
             usuarioBag.UserStatus = usuario.UserStatus;

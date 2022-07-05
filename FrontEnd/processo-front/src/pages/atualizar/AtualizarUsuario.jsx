@@ -11,10 +11,9 @@ import { parseJwt } from '../../services/auth';
 export default function Perfil() {
 
     const history = useHistory();
-    // const idUsuario = useParams();
+    const idUsuario = useParams();
     const [usuarios, setUsuario] = useState([]);
     const [idTipoUsuario, setIdTipoUsuario] = useState(0);
-    const [idUsuario, setIdUsuario] = useState(0);
     const [userStatus, setUserStatus] = useState(1)
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')

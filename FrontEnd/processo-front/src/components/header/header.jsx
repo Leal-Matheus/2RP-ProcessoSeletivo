@@ -23,10 +23,13 @@ export default function HeaderC() {
                         <Link to='/usuarios'><img className="logoHeader" src={logo} alt="Logo do Header" /></Link>
                     </div>
                     <div className="boxLoginHeader">
-                        <Link to="/usuarios" className="linkHeader">Usuarios</Link>
                         {
-                        parseJwt().role == '3' || parseJwt().role == '2' ?
-                        <Link to="/cadastrar" className="linkHeader">Cadastrar</Link> : <button></button>
+                            parseJwt().role == '3' || parseJwt().role == '2' ?
+                                <Link to="/usuarios" className="linkHeader">Usuarios</Link> : <a></a>
+                        }
+                        {
+                            parseJwt().role == '3' || parseJwt().role == '2' ?
+                                <Link to="/cadastrar" className="linkHeader">Cadastrar</Link> : <a></a>
                         }
                         <Link to="/meuPerfil" className="linkHeader">Perfil</Link>
                         <Link className="linkHeader" onClick={logOut}>logout</Link>

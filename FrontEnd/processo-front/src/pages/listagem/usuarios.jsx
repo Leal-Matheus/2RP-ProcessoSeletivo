@@ -102,8 +102,8 @@ export default function ListarUsuarios() {
                                                     }</span>
                                             </div>
                                             <div className='boxInteracoes'>
-                                                {/* <a onClick={OpenModal} onClickCapture = {() =>setIdUsuarioModal(usuarios.idUsuario)}><img className='iconCard' src={atualizar} alt='icone atualizar' /></a> */}
-                                                <a onClick={() => history.push(`/atualizarUsuario/${usuarios.idUsuario}`)}><img className='iconCard' src={atualizar} alt='icone atualizar' /></a>
+                                                <a onClick={OpenModal} onClickCapture = {() =>setIdUsuarioModal(usuarios.idUsuario)}><img className='iconCard' src={atualizar} alt='icone atualizar' /></a>
+                                                {/* <a onClick={() => history.push(`/atualizarUsuario/${usuarios.idUsuario}`)}><img className='iconCard' src={atualizar} alt='icone atualizar' /></a> */}
                                                 {
                                                     parseJwt().role === '3' ?
                                                     <button className='buttonInt' onClick={() => ExcluirUsuario(usuarios.idUsuario)} > <img className='iconCard' src={lixeira} alt='icone deletar' /> </button> : <a></a>

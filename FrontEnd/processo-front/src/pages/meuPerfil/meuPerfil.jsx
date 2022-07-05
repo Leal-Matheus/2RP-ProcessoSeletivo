@@ -15,15 +15,14 @@ export default function MeuPerfil() {
     const history = useHistory();
     const idUsuario = useParams();
     const [listaUsuarios, setListaUsuarios] = useState([]);
-    const [idTipoUsuario, setIdTipoUsuario] = useState(0);
-    const [userStatus, setUserStatus] = useState(1)
     const [nome, setNome] = useState('')
+    // const [idTipoUsuario, setIdTipoUsuario] = useState(parseJwt().jti.idTipoUsuario)
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
 
 
-    function BuscarUsuario() {
-        axios.get('http://localhost:5000/api/Usuarios' + parseJwt().jti, {
+    function BuscarUsuarioID() {
+        axios.get('http://localhost:5000/api/Usuarios/Buscar/id/' + parseJwt().jti, {
 
             headers: {
 
@@ -35,12 +34,8 @@ export default function MeuPerfil() {
             .then((resposta) => {
 
                 if (resposta.status === 200) {
+                    setListaUsuarios(resposta.data)
 
-                    resposta.data.map((usuarios) => {
-                        if (usuarios.idUsuario == idUsuario.idUsuario) {
-                            setListaUsuarios(usuarios)
-                        }
-                    })
 
                 }
 
@@ -53,13 +48,11 @@ export default function MeuPerfil() {
     function AtualizarUsuario(event) {
         event.preventDefault();
 
-        axios.put("http://localhost:5000/api/Usuarios/Alterar/id/" + parseJwt().jti, {
+        axios.put("http://localhost:5000/api/Usuarios/AlterarMeu/id/" + parseJwt().jti, {
 
             nome: nome,
-            idTipoUsuario: idTipoUsuario,
             email: email,
             senha: senha,
-            userStatus: userStatus
         }, {
 
             headers: {
@@ -69,15 +62,20 @@ export default function MeuPerfil() {
 
 
         })
-            .then(function (response) {
-                console.log(response);
-                console.log('usuario atualizado!')
-                alert("Usuario atualizado com sucesso!")
+            .then(response => {
+                if (response.status === 201) {
+
+                    BuscarUsuarioID();
+                    console.log("usuário atualizado!")
+                    setEmail('')
+                    setNome('')
+                    setSenha('')
+                }
             })
             .catch(erro => console.log(erro))
     }
 
-    useEffect(BuscarUsuario, [])
+    useEffect(BuscarUsuarioID, [])
 
     return (
         <div>
@@ -87,30 +85,30 @@ export default function MeuPerfil() {
                     <h1>Meu Perfil</h1>
                     <div className="containerOrganizacao">
                         <div className="containerCadastroLeft">
-                            {
+                            {/* {
                                 listaUsuarios.map((usuarios) => {
-                                    return (
-                                        <form className="formCadastro" onSubmit={AtualizarUsuario}>
-                                            <div className="inputLabelAtualizar">
-                                                <input type="text" name="nome" placeholder="Nome" value={nome} onChange={(evt) => setNome(evt.target.value)} />
-                                                <label for="nome">{usuarios.nome}</label>
-                                            </div>
+                                    return ( */}
+                            <form className="formCadastro" onSubmit={AtualizarUsuario}>
+                                <div className="inputLabelAtualizar">
+                                    <input type="text" name="nome" placeholder="Nome" value={nome} onChange={(evt) => setNome(evt.target.value)} />
+                                    <label for="nome">{listaUsuarios.nome}</label>
+                                </div>
 
-                                            <div className="inputLabelAtualizar">
-                                                <input type="email" name="email" placeholder="E-Mail" value={email} onChange={(evt) => setEmail(evt.target.value)} />
-                                                <label for="email">{usuarios.email}</label>
-                                            </div>
+                                <div className="inputLabelAtualizar">
+                                    <input type="email" name="email" placeholder="E-Mail" value={email} onChange={(evt) => setEmail(evt.target.value)} />
+                                    <label for="email">{listaUsuarios.email}</label>
+                                </div>
 
-                                            <div className="inputLabelAtualizar">
-                                                <input type="password" name="senha" placeholder="Senha" value={senha} onChange={(evt) => setSenha(evt.target.value)} />
-                                                <label for="senha">Senha</label>
-                                            </div>
-                                            <button className='button' type="submit">Atualizar</button>
-                                        </form>
+                                <div className="inputLabelAtualizar">
+                                    <input type="password" name="senha" placeholder="Senha" value={senha} onChange={(evt) => setSenha(evt.target.value)} />
+                                    <label for="senha">Senha</label>
+                                </div>
+                                <button className='button' type="submit">Atualizar</button>
+                            </form>
 
-                                    )
+                            {/* )
                                 })
-                            }
+                            } */}
 
                         </div>
                         <div className="containerCadastroRight">

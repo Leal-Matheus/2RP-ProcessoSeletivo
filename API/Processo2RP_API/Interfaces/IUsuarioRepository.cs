@@ -11,10 +11,11 @@ namespace Processo2RP_API.Interfaces
     {
         void CadastrarUsuario(UsuarioViewModel novoUsuario);
         void AtualizarUsuario(UsuarioViewModel novoUsuario, int idUsuario);
+        void AtualizarMeuUsuario(UsuarioAtualizadoViewModel novoUsuario, int idUsuario);
         bool DeletarUsuario(int idUsuario);
         bool AlterarStatus(int idUsuario);
         Usuario Login(string email, string senha);
-        BuscaUsuarioViewModel BuscarUsuario(int idUsuario);
+        Usuario BuscarPorId(int idUsuario);
         IEnumerable<Usuario> Listar();
     }
 }
