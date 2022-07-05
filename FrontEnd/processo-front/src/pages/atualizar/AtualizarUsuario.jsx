@@ -11,9 +11,10 @@ import { parseJwt } from '../../services/auth';
 export default function Perfil() {
 
     const history = useHistory();
-    const idUsuario = useParams();
+    // const idUsuario = useParams();
     const [usuarios, setUsuario] = useState([]);
     const [idTipoUsuario, setIdTipoUsuario] = useState(0);
+    const [idUsuario, setIdUsuario] = useState(0);
     const [userStatus, setUserStatus] = useState(1)
     const [nome, setNome] = useState('')
     const [email, setEmail] = useState('')
@@ -48,27 +49,6 @@ export default function Perfil() {
 
     }
 
-
-
-    function ExcluirUsuario(idUsuario) {
-        console.log(idUsuario)
-        axios.delete('http://localhost:5000/api/Usuarios/Excluir/id/' + idUsuario, {
-            headers: {
-                Authorization: 'Bearer ' + localStorage.getItem('usuario-token')
-            }
-        }
-        )
-
-            .then((resposta) => {
-                if (resposta.status === 200) {
-                    console.log('usuario deletado!')
-                    history.push(`/usuarios`)
-                }
-            })
-
-            .catch(erro => console.log(erro))
-    }
-
     function alterarStatus(event) {
         event.preventDefault();
         axios.patch('http://localhost:5000/api/Usuarios/AlterarStatus/id/' + idUsuario, {
@@ -92,6 +72,7 @@ export default function Perfil() {
 
         axios.put("http://localhost:5000/api/Usuarios/Alterar/id/" + idUsuario, {
 
+            idUsuario: idUsuario,
             nome: nome,
             idTipoUsuario: idTipoUsuario,
             email: email,
@@ -110,6 +91,7 @@ export default function Perfil() {
                 console.log(response);
                 console.log('usuario atualizado!')
                 alert("Usuario atualizado com sucesso!")
+                BuscarUsuario();
             })
             .catch(erro => console.log(erro))
     }
@@ -124,7 +106,7 @@ export default function Perfil() {
                     <h1>Atualizar usuário</h1>
                     <div className="containerOrganizacao">
                         <div className="containerCadastroLeft">
-                            <form className="formCadastro" onSubmit={AtualizarUsuario}>
+                            <form className="formCadastro" onSubmit={(AtualizarUsuario)}>
                                 <div className="inputLabelAtualizar">
                                     <input type="text" name="nome" placeholder="Nome" value={nome} onChange={(evt) => setNome(evt.target.value)} />
                                     <label for="nome">Nome</label>
@@ -155,10 +137,6 @@ export default function Perfil() {
                                 <button className='button' type="submit">Atualizar</button>
                             </form>
                             <div className="boxAlternativeButtons">
-                                {parseJwt().role == 3 && <button className='buttonDeletar' type="submit"  onClick={() => {
-                                ExcluirUsuario(usuarios.idUsuario) 
-                                history.push(`/usuarios`)}}
-                                >Excluir Usuário</button>}
                                 <button className='buttonDesativar' type="submit" onClick={(alterarStatus)}>Desativar Usuario</button>
                             </div>
                         </div>

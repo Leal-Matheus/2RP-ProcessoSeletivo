@@ -5,6 +5,7 @@ import { useHistory } from 'react-router-dom'
 import bgLogin from '../../assets/img/bgLogin.png'
 import Logo from '../../assets/img/logo2rp.png'
 import '../../assets/css/login.css'
+import { parseJwt, usuarioAutenticado } from '../../services/auth'
 
 
 export default function Login() {
@@ -22,7 +23,13 @@ export default function Login() {
             .then(resposta => {
                 if (resposta.status === 200) {
                     localStorage.setItem('usuario-token', resposta.data.token)
-                    history.push('/usuarios')
+                    if (parseJwt().role === '2' || parseJwt().role === '3') {
+                        history.push('/usuarios')
+                    }
+                    else if (parseJwt().role === '1') {
+                        history.push('/meuPerfil')
+                        console.log('logado: ' + usuarioAutenticado())
+                    }
                 }
             })
             .catch(resposta => {

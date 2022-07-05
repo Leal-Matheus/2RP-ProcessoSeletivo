@@ -40,3 +40,9 @@ h1{
     height: 3.5vh;
     margin-left: 1rem;
 }
+.buttonInt{
+    background-color: transparent;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+}

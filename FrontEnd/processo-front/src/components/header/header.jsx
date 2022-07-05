@@ -20,12 +20,15 @@ export default function HeaderC() {
             <div className="container">
                 <div className="navHeader">
                     <div className="boxInfoHeader">
-                        <img className="logoHeader" src={logo} alt="Logo do Header" />
+                        <Link to='/usuarios'><img className="logoHeader" src={logo} alt="Logo do Header" /></Link>
                     </div>
                     <div className="boxLoginHeader">
                         <Link to="/usuarios" className="linkHeader">Usuarios</Link>
-                        {parseJwt().role == 3 || parseJwt().role == 2 &&<Link to="/cadastrar" className="linkHeader">Cadastrar</Link>}
-                        <Link to="/usuarios" className="linkHeader">Perfil</Link>
+                        {
+                        parseJwt().role == '3' || parseJwt().role == '2' ?
+                        <Link to="/cadastrar" className="linkHeader">Cadastrar</Link> : <button></button>
+                        }
+                        <Link to="/meuPerfil" className="linkHeader">Perfil</Link>
                         <Link className="linkHeader" onClick={logOut}>logout</Link>
                     </div>
                 </div>

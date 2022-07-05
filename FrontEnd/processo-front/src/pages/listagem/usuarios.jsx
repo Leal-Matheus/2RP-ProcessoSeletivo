@@ -9,10 +9,11 @@ import atualizar from '../../assets/img/atualizar.png'
 import Footer from '../../components/footer/footer';
 import { Modall } from '../../components/modal/modal';
 import { useHistory } from "react-router-dom";
+import { parseJwt } from '../../services/auth';
 
 
 export default function ListarUsuarios() {
-
+    
     //States
     const history = useHistory();
     const [listaUsuarios, setListaUsuarios] = useState([]);
@@ -22,7 +23,25 @@ export default function ListarUsuarios() {
     const OpenModal = () => {
         setShowModal(prev => !prev);
     }
-
+    
+    function ExcluirUsuario(idUsuario) {
+        axios.delete('http://localhost:5000/api/Usuarios/Excluir/id/' + idUsuario, {
+            headers: {
+                Authorization: 'Bearer ' + localStorage.getItem('usuario-token')
+            }
+        }
+        )
+        
+        .then((resposta) => {
+            if (resposta.status === 204) {
+                    console.log(idUsuario)
+                    console.log('usuario deletado!');
+                    BuscarUsuarios();
+                }
+            })
+    
+            .catch(erro => console.log(erro))
+    }
     function BuscarUsuarios() {
         axios.get('http://localhost:5000/api/Usuarios', {
 
@@ -48,7 +67,10 @@ export default function ListarUsuarios() {
 
     }
 
-    useEffect(BuscarUsuarios, [])
+
+    useEffect(() => {
+        BuscarUsuarios();
+    }, [])
 
     return (
         <div>
@@ -82,7 +104,10 @@ export default function ListarUsuarios() {
                                             <div className='boxInteracoes'>
                                                 {/* <a onClick={OpenModal} onClickCapture = {() =>setIdUsuarioModal(usuarios.idUsuario)}><img className='iconCard' src={atualizar} alt='icone atualizar' /></a> */}
                                                 <a onClick={() => history.push(`/atualizarUsuario/${usuarios.idUsuario}`)}><img className='iconCard' src={atualizar} alt='icone atualizar' /></a>
-                                                {/* <button onClick={ExcluirUsuario} > <img className='iconCard' src={lixeira} alt='icone deletar' /> </button> */}
+                                                {
+                                                    parseJwt().role === '3' ?
+                                                    <button className='buttonInt' onClick={() => ExcluirUsuario(usuarios.idUsuario)} > <img className='iconCard' src={lixeira} alt='icone deletar' /> </button> : <a></a>
+                                                }
                                             </div>
                                         </div>
                                     )

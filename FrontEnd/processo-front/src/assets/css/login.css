@@ -157,27 +157,13 @@ top: 0;
     font-weight: 500;
     color: white;
 }
-.buttonDeletar{
-    width: 11.6vw;
-    height: 52px;
-    border-radius: 15px;
-    background-color: #993A34;
-    margin-top: 2rem;
-    padding: 15 25;
-    cursor: pointer;
-    border: none;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 500;
-    color: white;
-    margin-right: 2rem;
-}
 .buttonDeletar:hover{
     border: 1px solid #993A34;
     color: #993A34;
     background-color: transparent;
 }
 .buttonDesativar{
-    width: 11.6vw;
+    width: 25vw;
     height: 52px;
     border-radius: 15px;
     background-color: #364D63;

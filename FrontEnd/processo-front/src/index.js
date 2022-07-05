@@ -11,6 +11,7 @@ import Perfil from './pages/atualizar/AtualizarUsuario';
 import Cadastro from './pages/cadastrar/cadastrarUsuario';
 import ListarUsuarios from './pages/listagem/usuarios';
 import Login from './pages/login/login.jsx';
+import MeuPerfil from './pages/meuPerfil/meuPerfil';
 import reportWebVitals from './reportWebVitals';
 import { parseJwt, usuarioAutenticado  } from './services/auth';
 
@@ -46,6 +47,7 @@ const routing = (
           <PermissaoAdm path="/usuarios" component={ListarUsuarios}/>
           <PermissaoAdm path="/cadastrar" component={Cadastro}/>
           <Logado path="/atualizarUsuario/:idUsuario" component={Perfil}/>
+          <Logado path="/meuPerfil" component={MeuPerfil}/>
         </Switch>
       </div>
   </Router>
