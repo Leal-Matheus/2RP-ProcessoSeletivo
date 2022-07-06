@@ -2,6 +2,16 @@
 
 <h4>Estágio FullStack Developer</h4>
 
+<h2 align="left">Tecnologias e Plataformas utilizadas</h2>
+<p align="left">
+  <h4>BackEnd</h3>
+  <a><img src="https://img.shields.io/badge/C%23-239120?style=for-the-badge&logo=c-sharp&logoColor=white"/></a>
+   <h4>FrontEnd</h3>
+  <a><img src="	https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/></a>
+   <h4>Banco de Dados</h3>
+  <a><img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white"/></a>
+</p>
+
 <h3>Escopo - Problema 1</h3>
 
 <p>Criar um sistema que possibilite o cadastro e login de usuários</p>
