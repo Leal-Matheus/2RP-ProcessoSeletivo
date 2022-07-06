@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import Burger from './burguer';
 import logo from '../../assets/img/logo2rp.png'
 import { Link } from 'react-router-dom';
+import { parseJwt } from '../../services/auth';
 
 const Nav = styled.nav`
   max-width: 1440px;
@@ -13,7 +14,7 @@ const Nav = styled.nav`
   overflow-x: hidden;
   overflow-y: hidden;
   height: 10vh;
-    align-items: center;
+  align-items: center;
 
 `
 
@@ -21,7 +22,7 @@ const Navbar = () => {
     return (
         <Nav>
             <div className='logoHeader'>
-                <Link> <img className='logoHeader' src={logo} alt="Logo do Senai" /></Link>
+                <Link> <img className='logoHeader' src={logo} alt="Logo" /></Link>
             </div>
             <Burger />
         </Nav>

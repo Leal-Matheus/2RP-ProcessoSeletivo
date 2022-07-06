@@ -49,7 +49,7 @@ export default function Login() {
                 <div className="loginRight">
                     <div className="formText">
                         <div className="loginText">
-
+                            <img src={Logo} alt="Logo do senai" className="logoResponsivoLogin" />
                             <h1>Login</h1>
                             <p>Acesse sua conta e navegue pelo nosso sistema!</p>
                         </div>

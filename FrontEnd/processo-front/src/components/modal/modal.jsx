@@ -222,13 +222,13 @@ export const Modall = ({ showModal, setShowModal, usuarios }) => {
                                             <option value={2}>Administrador</option>
                                             <option value={3}>Root</option>
                                         </select>
-
+                                        <label className='label_switch' htmlFor="switch">Usuario Ativo?</label>
                                         <input type="checkbox"
                                             id="switch"
                                             name="validar"
                                             value={userStatus}
                                             onClick={checkAtivo}
-                                        /><label className='label_switch' htmlFor="switch">Toggle</label>
+                                        />
                                         <button className='button' type="submit">Atualizar</button>
                                     </form>
 

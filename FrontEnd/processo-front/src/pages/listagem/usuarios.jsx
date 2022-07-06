@@ -10,6 +10,7 @@ import Footer from '../../components/footer/footer';
 import { Modall } from '../../components/modal/modal';
 import { useHistory } from "react-router-dom";
 import { parseJwt } from '../../services/auth';
+import Navbar from '../../components/header/nav';
 
 
 export default function ListarUsuarios() {
@@ -77,7 +78,12 @@ export default function ListarUsuarios() {
             <Modall usuarios={listaUsuarios.find(usuarios => usuarios.idUsuario == idUsuarioModal)} showModal={showModal} setShowModal={setShowModal} />
             <div className='headerP'>
 
-                <HeaderC />
+                <div className='headerC'>
+                    <HeaderC/>
+                </div>
+                <div className='navbar'>
+                    <Navbar/>
+                </div>
             </div>
             <main>
                 <div className='container'>

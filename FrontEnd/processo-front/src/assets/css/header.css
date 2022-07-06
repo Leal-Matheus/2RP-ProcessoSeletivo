@@ -43,3 +43,10 @@ header{
     display: flex;
     align-items: center;
 }
+@media screen and (max-width: 740px) {
+    .boxLoginHeader{
+        flex-direction: column;
+        height: 60vh;
+        justify-content: space-around;
+    }
+}
